@@ -1,0 +1,7 @@
+{
+  "name": "goat-scrapbook",
+  "version": "1.0.0",
+  "description": "Scrapbook Sticker · Наалттай цомог: puts the clips on a cream paper page inside taped Polaroids, turns a person or product into a white-edged cut-out sticker, adds a price circle and handwritten Mongolian notes, with stop-motion hops. Renders a 1080x1920 MP4 for Reels/TikTok.",
+  "author": { "name": "GOAT Academy" },
+  "keywords": ["video", "editing", "reels", "tiktok", "scrapbook", "sticker", "collage", "mongolian", "ffmpeg"]
+}

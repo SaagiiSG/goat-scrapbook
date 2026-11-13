@@ -1,0 +1,11 @@
+{
+  "name": "goat-scrapbook",
+  "owner": { "name": "GOAT Academy" },
+  "plugins": [
+    {
+      "name": "goat-scrapbook",
+      "source": "./",
+      "description": "Scrapbook Sticker · Наалттай цомог: paper-page collage look with cut-out stickers for Reels/TikTok. Mongolian-first."
+    }
+  ]
+}
