@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="mn" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js"></script>
+    <script src="plan.js"></script>
+    <script src="goat-lib.js"></script>
+    <link rel="stylesheet" href="look.css" />
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{DUR}}" data-width="1080" data-height="1920">
+      <div id="paper"></div>
+      <div id="blot"></div>
+      <div id="shade"></div>
+      <div id="minis" class="layer">
+{{MINIS}}
+      </div>
+      <div id="titles" class="layer"></div>
+      <div id="pile" class="layer">
+{{CARDS}}
+      </div>
+      <div id="stickers" class="layer">
+{{STICKERS}}
+      </div>
+      <div id="prices" class="layer"></div>
+      <div id="notes" class="layer"></div>
+      <!-- The sticker's white rim: the picture's outline (alpha cut at 50%) grown 16 px with feMorphology, its square
+           corners rounded (blur + cut at 50% again), filled white, with the preview's drop shadow (8, 14, blur 10 px,
+           35%) under it. On a wrapper with 60 px of padding, so the rim and shadow stay inside the filter's box. -->
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+        <filter id="rim" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB">
+          <feComponentTransfer in="SourceAlpha" result="solid"><feFuncA type="discrete" tableValues="0 1" /></feComponentTransfer>
+          <feMorphology in="solid" operator="dilate" radius="16" result="fat" />
+          <feGaussianBlur in="fat" stdDeviation="5" result="soft" />
+          <feComponentTransfer in="soft" result="edge"><feFuncA type="linear" slope="8" intercept="-3.5" /></feComponentTransfer>
+          <feFlood flood-color="#FFFFFF" result="paint" />
+          <feComposite in="paint" in2="edge" operator="in" result="white" />
+          <feGaussianBlur in="edge" stdDeviation="5" result="blur" />
+          <feOffset in="blur" dx="8" dy="14" result="drop" />
+          <feFlood flood-color="#000000" flood-opacity="0.35" result="ink" />
+          <feComposite in="ink" in2="drop" operator="in" result="shadow" />
+          <feMerge><feMergeNode in="shadow" /><feMergeNode in="white" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </svg>
+    </div>
+    <script src="look.js"></script>
+  </body>
+</html>

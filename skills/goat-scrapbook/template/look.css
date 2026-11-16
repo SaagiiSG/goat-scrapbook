@@ -1,0 +1,82 @@
+@font-face { font-family: "Caveat"; src: url("fonts/Caveat%5Bwght%5D.ttf"); font-weight: 400 700; }
+@font-face { font-family: "Pangolin"; src: url("fonts/Pangolin-Regular.ttf"); }
+@font-face { font-family: "Rubik Marker Hatch"; src: url("fonts/RubikMarkerHatch-Regular.ttf"); }
+
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #F2EBDD; }
+/* preview .sb .screen: cream #F2EBDD; kraft is v1's brown (200, 162, 122) */
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #F2EBDD; }
+#root.kraft { background: #C8A27A; }
+.layer, #paper, #blot, #shade { position: absolute; inset: 0; }
+
+/* preview .sb .paper: fractal-noise fibre in a warm brown, multiplied at 50%. The preview's grain was drawn in its
+   210 px phone, so at 1080 px it is ~5x coarser than the same SVG here: baseFrequency .6 becomes .32. Under it, v1's
+   soft blotches (a very low-frequency noise), and a faint darkening towards the edges, as on a photographed page. */
+#paper { opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .48  0 0 0 0 .38  0 0 0 .3 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"); }
+#blot { opacity: .35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='1920'><filter id='b'><feTurbulence type='fractalNoise' baseFrequency='.004 .003' numOctaves='3' seed='3'/><feColorMatrix values='0 0 0 0 .62  0 0 0 0 .52  0 0 0 0 .40  0 0 0 1.4 -.55'/></filter><rect width='100%' height='100%' filter='url(%23b)'/></svg>"); }
+#shade { mix-blend-mode: multiply; background: radial-gradient(ellipse 80% 70% at 50% 46%, rgba(120, 90, 50, 0) 55%, rgba(120, 90, 50, .16)); }
+
+/* Every piece: an outer box placed and turned (its lean), .pop (the landing), .jit (the stop-motion hop). */
+.card, .sticker, .price, .title, .note { position: absolute; }
+.pop, .jit { position: relative; }
+
+/* preview .sb .pola: #F3F0E8 card, the photo inset 4.3% of its width (22 px), a handwritten caption strip under it
+   (Caveat 700 56 px, #3A3530, 5% above, 9% below), a soft shadow. 508 px wide at 1 CSS px = 1 output px. */
+.card { left: 76px; top: 524px; width: 508px; }
+.pola { background: #F3F0E8; padding: 22px 22px 0; box-shadow: 8px 14px 16px rgba(0, 0, 0, .28); }
+.pic { width: 464px; height: 464px; overflow: hidden; background: #2B2622; }
+.pic video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cap { position: relative; height: 127px; }
+.cap span { position: absolute; left: 50%; top: 25px; width: max-content; white-space: nowrap;
+  font: 700 56px/1 "Caveat", cursive; color: #3A3530; }
+/* preview .sb .tape: 38% of the card wide, 46 px, 78% opaque, plain ends; a faint sheen added. No clip-path anywhere on
+   a repeated piece: HyperFrames' capture can go black with ~40 elements carrying clip-path, radial-gradient or blur. */
+.tape { position: absolute; width: 193px; height: 46px; opacity: .78; border-radius: 2px;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .05)); }
+.tape.t0 { left: -41px; top: -18px; transform: rotate(-28deg); }
+.tape.t1 { right: -51px; top: -12px; transform: rotate(24deg); }
+
+/* frame "print": a 480x600 print with a 16 px white border (v1), one strip of tape across its top, and its caption
+   handwritten on a strip of cream masking tape stuck across the bottom of the photo */
+.f-print .card { left: 74px; top: 514px; width: 512px; }
+.f-print .pola { padding: 16px; background: #FBFAF6; }
+.f-print .pic { width: 480px; height: 600px; }
+.f-print .cap { position: absolute; left: 50%; bottom: 30px; width: 0; height: 58px; }
+/* the label is the caption itself, so it is only on the photo while its caption is (it writes on and fades with it) */
+.f-print .cap span { top: 0; height: 58px; box-sizing: border-box; padding: 7px 22px 0; font-size: 44px;
+  background: rgba(240, 231, 205, .96); box-shadow: 0 2px 4px rgba(0, 0, 0, .18); border-radius: 2px; }
+.f-print .tape.t0 { left: 160px; top: -22px; transform: rotate(-3deg); }
+.f-print .tape.t1 { display: none; }
+
+/* The lower page: small copies of the photos already covered on the pile (44% of a card), each with a bit of tape. */
+.mini { position: absolute; }
+.mpola { position: relative; background: #F3F0E8; padding: 10px 10px 30px; box-shadow: 4px 8px 10px rgba(0, 0, 0, .25); }
+.mpola img { display: block; width: 204px; height: 204px; object-fit: cover; }
+.f-print .mpola { padding: 8px; background: #FBFAF6; }
+.f-print .mpola img { width: 192px; height: 240px; }
+.mpola::after { content: ""; position: absolute; left: 50%; top: -12px; width: 90px; height: 24px; margin-left: -45px;
+  background: var(--tape, #F4B6C2); opacity: .78; transform: rotate(-4deg); }
+
+/* preview .t-stick: the sticker's right edge at 98% of the width (1058 px), its top at 36% (691 px), 594 px wide with
+   its rim, leaning 4°. The picture sits in .rim's 60 px padding, where the rim and shadow are drawn. */
+.rim { padding: 60px; filter: url(#rim); }
+.rim img { display: block; }
+.sticker.print img { border-radius: 26px; }
+
+/* preview .sb .price: a 260 px #F9E79F disc (a soft linear highlight added), Pangolin 56 px #2B2622, leaning 9° */
+.price { left: 605px; top: 422px; }
+.disc { width: 260px; height: 260px; border-radius: 50%; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; background: linear-gradient(150deg, #FCF0BC 12%, #F9E79F 50%, #F2DB86);
+  box-shadow: 6px 10px 12px rgba(0, 0, 0, .22); }
+.disc div { width: max-content; white-space: nowrap; font: 56px/1.08 "Pangolin", cursive; color: #2B2622; }
+
+/* preview .t-title: Rubik Marker Hatch 170 px #2B2622, leaning -4°; .t-note: Caveat 700 72 px #3A3530, leaning -3° */
+.title { left: 119px; top: 278px; width: max-content; white-space: nowrap; font: 170px/1 "Rubik Marker Hatch", sans-serif; color: #2B2622; }
+.note { left: 92px; top: 1140px; width: max-content; white-space: nowrap; font: 700 72px/1 "Caveat", cursive; color: #3A3530; }
+/* The note is handwritten on a strip torn from a ruled notebook (an off-white scrap with uneven corners, a faint blue
+   rule the words sit on), so it stays readable where it crosses a sticker: one more layer of paper. */
+.note .pop { filter: drop-shadow(3px 6px 5px rgba(0, 0, 0, .18)); }
+.note .jit { padding: 14px 28px; background-color: #FBF8EF;
+  background-image: linear-gradient(180deg, transparent calc(100% - 15px - .17em), rgba(110, 145, 200, .45) calc(100% - 15px - .17em), rgba(110, 145, 200, .45) calc(100% - 13px - .17em), transparent calc(100% - 13px - .17em));
+  border-radius: 2px 7px 3px 6px / 6px 2px 7px 3px; }

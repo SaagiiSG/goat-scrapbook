@@ -2,7 +2,7 @@
 
 <p align="center"><img src="assets/poster.jpg" width="300" alt="Scrapbook Sticker · Наалттай цомог"></p>
 
-**Claude Code дотор ажилладаг видео эдитийн skill.** Таны үйлчлүүлэгч, үс засалт эсвэл бараа цагаан хүрээтэй наалт болж, цаасан хуудсан дээр туузаар наагдана. Хажууд нь гар бичмэл тэмдэглэл гарна.
+**Claude Code дотор ажилладаг видео эдитийн skill.** Цаасан хуудсан дээр бичлэгүүд тань туузаар наасан Polaroid зураг болж нэг нэгээрээ овоолж тавигдана. Таны өгсөн зураг (үйлчлүүлэгч, үс засалт, бараа) зузаан цагаан хүрээтэй наалт болно. Дээр нь маркераар гарчиг, шар дугуйд үнэ, доор нь гар бичмэл тэмдэглэл. Бүгд stop-motion шиг үсэрч хөдөлнө.
 
 Reels, TikTok-д бэлэн 1080×1920 MP4 гаргана. GOAT Academy-гийн 14 эдитийн стилийн нэг.
 
@@ -19,8 +19,9 @@ Reels, TikTok-д бэлэн 1080×1920 MP4 гаргана. GOAT Academy-гийн
 
 - **Claude Code** (desktop app эсвэл terminal), Claude Pro / Max эрхтэй
 - **Mac эсвэл Windows**
-- **ffmpeg** болон **uv**. Байхгүй бол Claude өөрөө шалгаад, суулгах командыг хэлж өгнө.
-- Анх удаа ажиллуулахад хайчлах загвар (~170 MB) нэг удаа татагдана.
+- **Node 22+**, **ffmpeg**. Байхгүй бол Claude өөрөө шалгаад, суулгах командыг хэлж өгнө.
+- **Компьютер:** Mac эсвэл 64-bit Windows 10/11. Apple чиптэй Mac (M1+) дээр туршсан. Windows дээр одоогоор туршаагүй.
+- Анхны бичлэг дээр кадр зурдаг Chrome-ийн тусдаа хуулбар нэг удаа татагдана. Бүх зүйл таны компьютер дээр ажиллана, юу ч интернэтэд илгээгдэхгүй.
 
 ---
 
@@ -43,9 +44,26 @@ Claude өөрөө суулгана. Дараа нь `/reload-plugins` гэж б�
 2. Claude Code-д "Энэ хавтсан дахь plugin-ийг суулгаад өг:" гэж бичээд задалсан `goat-scrapbook` хавтсаа чирж оруулна.
 3. `/reload-plugins` гэж бичнэ.
 
-**Шинэ хувилбар гарвал:** Claude-д "goat-scrapbook plugin-ийг шинэчил" гэж хэлэхэд болно.
+---
 
-> **For Claude Code:** to install this plugin, run `claude plugin marketplace add SaagiiSG/goat-scrapbook` (or, from an unzipped copy, `claude plugin marketplace add <path to the goat-scrapbook folder>`) and then `claude plugin install goat-scrapbook@goat-scrapbook`, then tell the user to type `/reload-plugins`. To update it: `claude plugin marketplace update goat-scrapbook` and then `claude plugin update goat-scrapbook@goat-scrapbook`.
+## Шинэчлэлт
+
+Автомат шинэчлэлт анхандаа унтраалттай байдаг. Бид таны өмнөөс асааж чадахгүй тул нэг удаа өөрөө асаана:
+1. Claude Code дотор `/plugin` гэж бичнэ.
+2. **Marketplaces** → **goat-scrapbook** → **Enable auto-update** дээр дарна.
+
+Ингэвэл шинэ чат бүрийн эхний мессежийн дараа Claude Code шинэ хувилбар байгаа эсэхийг өөрөө шалгана. "Plugin updated" гэж гарвал `/reload-plugins` гэж бичнэ.
+
+**Гараар шинэчлэх:** Claude-д "goat-scrapbook plugin-ийг шинэчил" гэж хэлэхэд болно. Эсвэл terminal дээр энэ 2 мөрийг ээлжлэн бичнэ:
+```
+claude plugin marketplace update goat-scrapbook
+claude plugin update goat-scrapbook@goat-scrapbook
+```
+Дараа нь Claude Code дотор `/reload-plugins` гэж бичих эсвэл Claude Code-оо хаагаад дахин нээнэ.
+
+**Zip файлаас суулгасан бол** plugin өөрөө шинэчлэгдэхгүй. Шинэ хувилбар авахын тулд дээрх GitHub-ийн аргаар суулгаарай.
+
+> **For Claude Code:** to install this plugin, run `claude plugin marketplace add SaagiiSG/goat-scrapbook` (or, from an unzipped copy, `claude plugin marketplace add <path to the goat-scrapbook folder>`) and then `claude plugin install goat-scrapbook@goat-scrapbook`, then tell the user to type `/reload-plugins`. To update it: run `claude plugin marketplace update goat-scrapbook` and then `claude plugin update goat-scrapbook@goat-scrapbook`, then tell the user to type `/reload-plugins`. Auto-update is off by default; the user turns it on once in `/plugin` → Marketplaces → goat-scrapbook → Enable auto-update. A copy installed from an unzipped folder never updates by itself; to get updates, install it from GitHub (`SaagiiSG/goat-scrapbook`) instead.
 
 ---
 
@@ -54,7 +72,7 @@ Claude өөрөө суулгана. Дараа нь `/reload-plugins` гэж б�
 1. Видео бүрд **шинэ хоосон хавтас** үүсгэ.
 2. Claude Code-ийг тэр хавтсанд нээ.
 3. Бичнэ: `/goat-scrapbook:goat-scrapbook` эсвэл энгийнээр: **"энэ бичлэгээр наалттай цомгийн стиль хийгээд өг"**
-4. Бичлэгээ чирж оруулаад тэмдэглэл болгох богино үгс, үнэ байвал үнээ бичнэ.
+4. Бичлэг, наалт болгох зургаа чирж оруулаад гарчиг, тэмдэглэл болгох богино үгс, үнэ байвал үнээ бичнэ.
 5. Claude юу хийхээ товч хэлнэ. Таалагдвал "ок" гэхэд л болно.
 6. `output/scrapbook.mp4` бэлэн. Instagram, TikTok руу шууд оруулна.
 
@@ -70,9 +88,13 @@ Claude өөрөө суулгана. Дараа нь `/reload-plugins` гэж б�
 
 ## Бичлэг хийх зөвлөгөө
 
-- Хүн эсвэл барааг цэвэр, энгийн дэвсгэрийн өмнө ав.
-- Наалт болох мөчид 2 секунд хөдлөлгүй зогсоо.
-- Толь, эмх замбараагүй дэвсгэр, үстэй ижил өнгийн хана хайчлалтыг эвдэнэ.
+- Зургийн карт бүрд 2–4 секундын бичлэг эсвэл зураг бэлдээрэй.
+- Наалтад ямар ч зураг болно. Хүн эсвэл барааны ар талыг арилгасан зураг өгвөл хэлбэрээрээ хайчлагдсан наалт болно:
+  - **iPhone:** зургаа нээгээд хүн эсвэл бараан дээр удаан дараад **Copy Subject** (эсвэл Share → Save Image).
+  - **Samsung, Android:** хүн эсвэл бараан дээр удаан дараад хадгална.
+  - **Mac:** Finder дээр зураг дээрээ баруун товч → **Quick Actions** → **Remove Background**.
+  - **Windows:** **Paint**-ээр нээгээд **Remove background**, PNG болгож хадгална.
+- Ар тал нь арилаагүй зураг ч болно: дугуй булантай, цагаан хүрээтэй хэвлэсэн наалт болно.
 
 ---
 
